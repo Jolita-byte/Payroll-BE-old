@@ -1,13 +1,15 @@
 package Time;
 
+import General.Code;
 import java.time.LocalDate;
+
 
 public class Time {
     private LocalDate date;
-    private TimeCode timeCode;
+    private Code timeCode;
     private float duration;
 
-    public Time(LocalDate date, TimeCode timeCode, float duration) {
+    public Time(LocalDate date, Code timeCode, float duration) {
         this.date = date;
         this.timeCode = timeCode;
         this.duration = duration;
@@ -17,7 +19,7 @@ public class Time {
         return date;
     }
 
-    public TimeCode getTimeCode() {
+    public Code getTimeCode() {
         return timeCode;
     }
 
