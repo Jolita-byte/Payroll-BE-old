@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class Main {
@@ -23,7 +24,7 @@ public class Main {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
 
-          /*employeeDAO.createEmployee(new Employee("Pirmas", "", "Pirmokas" ));
+            employeeDAO.createEmployee(new Employee("Pirmas", "", "Pirmokas" ));
             employeeDAO.createEmployee(new Employee("Antras", "", "Antrokas" ));
             employeeDAO.createEmployee(new Employee("Trečias", "", "Trečiokas" ));
             employeeDAO.createEmployee(new Employee("Ketvirtas", "", "Ketvirtokas" ));
@@ -32,13 +33,18 @@ public class Main {
             employeeDAO.createEmployee(new Employee("Septintas", "", "Septintokas" ));
             employeeDAO.createEmployee(new Employee("Aštuntas", "", "Aštuntokas" ));
             employeeDAO.createEmployee(new Employee("Devintas", "", "Devintokas" ));
-            employeeDAO.createEmployee(new Employee("Dešimtas", "", "Dešimtokas" ));*/
+            employeeDAO.createEmployee(new Employee("Dešimtas", "", "Dešimtokas" ));
 
             ContractDAO contractDAO = new ContractDAOImpl(conn);
-            Employee employee = new Employee(1, "Pirmas", "", "Pirmokas");
-            Contract contract = new Contract(employee, LocalDate.of(2021,01,01), LocalDate.of(2020, 12, 15), null);
-            ContractLine contractLine = new ContractLine(contract, LocalDate.of(2021,01,01), LocalDate.of(2025,12,31), new Code("A5", "8 val/5 dienų"), new Code("INZ", "Inžinierius"), 1, ContractLine.AmountType.MONTHLY, 1000);
-            contractDAO.createContract(contractLine);
+
+            Contract contract = new Contract(2,LocalDate.of(2021,01,15), LocalDate.of(2021,01,10), null);
+            ContractLine contractLine = new ContractLine(LocalDate.of(2021,01,15),"A5", "INZ", 1, ContractLine.AmountType.MONTHLY, 2000f);
+
+
+            //contractDAO.createContract(contract, contractLine);
+            ContractLine contractLine2 = new ContractLine(null,null,null,null,1700f);
+
+           contractDAO.updateContract(2, LocalDate.of(2021, 05, 10), contractLine2);
 
 
 

@@ -1,25 +1,24 @@
 package Employee;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Contract {
     private Integer id;
-    private Employee employee;
+    private Integer employeeID;
     private LocalDate EmploymentDate;
     private LocalDate ContractSignDate;
     private LocalDate TerminaitionDate;
 
-    public Contract(Employee employee, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
-        this.employee = employee;
+    public Contract(Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
+        this.employeeID = employeeID;
         EmploymentDate = employmentDate;
         ContractSignDate = contractSignDate;
         TerminaitionDate = terminaitionDate;
     }
 
-    public Contract(Integer id, Employee employee, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
+    public Contract(Integer id, Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
         this.id = id;
-        this.employee = employee;
+        this.employeeID = employeeID;
         EmploymentDate = employmentDate;
         ContractSignDate = contractSignDate;
         TerminaitionDate = terminaitionDate;
@@ -33,12 +32,12 @@ public class Contract {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee(Integer employeeId) {
+        this.employeeID = employeeId;
     }
 
     public LocalDate getEmploymentDate() {

@@ -1,7 +1,5 @@
 package Employee;
 
-import General.Code;
-
 import java.time.LocalDate;
 
 public class ContractLine {
@@ -11,53 +9,47 @@ public class ContractLine {
         HOURLY,
     }
 
-    private Integer id;
-    private Contract contract;
+    private Integer contractID;
     private LocalDate startDate;
-    private LocalDate endDate;
-    private Code schedule;
-    private Code position;
-    private int staff;
+    private String scheduleID;
+    private String positionID;
+    private Integer staff;
     private AmountType amountType;
-    private float amount;
+    private Float amount;
 
-    public ContractLine(Contract contract, LocalDate startDate, LocalDate endDate, Code schedule, Code position, int staff, AmountType amountType, float amount) {
-        this.contract = contract;
+    public ContractLine(Integer contractID, LocalDate startDate, String scheduleID, String positionID, Integer staff, AmountType amountType, Float amount) {
+        this.contractID = contractID;
         this.startDate = startDate;
-        this.endDate = endDate;
-        this.schedule = schedule;
-        this.position = position;
+        this.scheduleID = scheduleID;
+        this.positionID = positionID;
         this.staff = staff;
         this.amountType = amountType;
         this.amount = amount;
     }
 
-    public ContractLine(Integer id, Contract contract, LocalDate startDate, LocalDate endDate, Code schedule, Code position, int staff, AmountType amountType, float amount) {
-        this.id = id;
-        this.contract = contract;
+    public ContractLine(LocalDate startDate, String scheduleID, String positionID, Integer staff, AmountType amountType, Float amount) {
         this.startDate = startDate;
-        this.endDate = endDate;
-        this.schedule = schedule;
-        this.position = position;
+        this.scheduleID = scheduleID;
+        this.positionID = positionID;
         this.staff = staff;
         this.amountType = amountType;
         this.amount = amount;
     }
 
-    public Integer getId() {
-        return id;
+    public ContractLine(String scheduleID, String positionID, Integer staff, AmountType amountType, Float amount) {
+        this.scheduleID = scheduleID;
+        this.positionID = positionID;
+        this.staff = staff;
+        this.amountType = amountType;
+        this.amount = amount;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getContractID() {
+        return contractID;
     }
 
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
+    public void setContractID(Integer contractID) {
+        this.contractID = contractID;
     }
 
     public LocalDate getStartDate() {
@@ -68,35 +60,27 @@ public class ContractLine {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public String getScheduleID() {
+        return scheduleID;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setScheduleID(String scheduleID) {
+        this.scheduleID = scheduleID;
     }
 
-    public Code getSchedule() {
-        return schedule;
+    public String getPositionID() {
+        return positionID;
     }
 
-    public void setSchedule(Code schedule) {
-        this.schedule = schedule;
+    public void setPositionID(String positionID) {
+        this.positionID = positionID;
     }
 
-    public Code getPosition() {
-        return position;
-    }
-
-    public void setPosition(Code position) {
-        this.position = position;
-    }
-
-    public int getStaff() {
+    public Integer getStaff() {
         return staff;
     }
 
-    public void setStaff(int staff) {
+    public void setStaff(Integer staff) {
         this.staff = staff;
     }
 
@@ -108,7 +92,7 @@ public class ContractLine {
         this.amountType = amountType;
     }
 
-    public float getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
