@@ -2,22 +2,22 @@ package Schedule;
 
 import java.time.LocalDate;
 
-public class ShedulePatternLine {
+public class SchedulePatternLine {
     Integer id;
     String scheduleCodeID;
-    LocalDate initielaDate;
+    LocalDate initialDate;
     String shiftCodeID;
 
-    public ShedulePatternLine(Integer id, String scheduleCodeID, LocalDate initielaDate, String shiftCodeID) {
+    public SchedulePatternLine(Integer id, String scheduleCodeID, LocalDate initialDate, String shiftCodeID) {
         this.id = id;
         this.scheduleCodeID = scheduleCodeID;
-        this.initielaDate = initielaDate;
+        this.initialDate = initialDate;
         this.shiftCodeID = shiftCodeID;
     }
 
-    public ShedulePatternLine(String scheduleCodeID, LocalDate initielaDate, String shiftCodeID) {
+    public SchedulePatternLine(String scheduleCodeID, LocalDate initialDate, String shiftCodeID) {
         this.scheduleCodeID = scheduleCodeID;
-        this.initielaDate = initielaDate;
+        this.initialDate = initialDate;
         this.shiftCodeID = shiftCodeID;
     }
 
@@ -37,12 +37,12 @@ public class ShedulePatternLine {
         this.scheduleCodeID = scheduleCodeID;
     }
 
-    public LocalDate getInitielaDate() {
-        return initielaDate;
+    public LocalDate getInitialDate() {
+        return initialDate;
     }
 
-    public void setInitielaDate(LocalDate initielaDate) {
-        this.initielaDate = initielaDate;
+    public void setInitialDate(LocalDate initialDate) {
+        this.initialDate = initialDate;
     }
 
     public String getShiftCodeID() {

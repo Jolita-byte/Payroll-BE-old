@@ -67,7 +67,7 @@ public class CodeDAOImpl implements CodeDAO {
 
     @Override
     public void deleteCode(String id) {
-        String sql = "DELETE FROM " + table + " EMPLOYEE WHERE id = ?";
+        String sql = "DELETE FROM " + table + " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, id);
             statement.execute();

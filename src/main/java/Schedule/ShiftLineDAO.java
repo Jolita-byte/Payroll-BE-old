@@ -1,12 +1,10 @@
 package Schedule;
 
-import General.Code;
-
 import java.util.Optional;
 
 public interface ShiftLineDAO {
-/*    void createShiftLine(Shift;
-    Optional<Code> readCode(String id);
-    void updateCode(String id, Code code);
-    void deleteCode(String id);*/
+    void createShiftLine(ShiftLine shiftLine);
+    Optional<ShiftLine> readShiftLine(Integer id);
+    void updateShiftLine(Integer id, ShiftLine shiftLine);
+    void deleteShiftLine(Integer id);
 }
