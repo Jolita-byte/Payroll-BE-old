@@ -3,7 +3,6 @@ package Employee;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     private final Connection connection;
@@ -25,7 +24,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void deleteEmployee(int id) {
+    public void readEmployee(Integer id) {
+
+    }
+
+    @Override
+    public void updateEmployee(Integer id, Employee employee) {
+
+    }
+
+    @Override
+    public void deleteEmployee(Integer id) {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM EMPLOYEE WHERE id = ?")){
             statement.setInt(1, id);
             statement.execute();
