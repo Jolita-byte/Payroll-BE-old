@@ -9,6 +9,14 @@ public class ShiftLine {
     LocalTime begin;
     LocalTime end;
 
+    /**
+     *
+     * @param id
+     * @param shiftCodeID
+     * @param timeCodeID
+     * @param begin
+     * @param end
+     */
     public ShiftLine(Integer id, String shiftCodeID, String timeCodeID, LocalTime begin, LocalTime end) {
         this.id = id;
         this.shiftCodeID = shiftCodeID;

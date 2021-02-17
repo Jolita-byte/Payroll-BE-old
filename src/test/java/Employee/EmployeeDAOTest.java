@@ -3,6 +3,8 @@ package Employee;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,14 +12,28 @@ class EmployeeDAOTest {
 
     @Test
     public void createEmpoloyeeTest(){
-        EmployeeDAO employeeDAO = new EmployeeDAOImpl(Mockito.mock(Connection.class));
-        Employee employee = new Employee("Jonas", "Jonukas", "Jonaitis");
+        Connection conn = Mockito.mock(Connection.class);
+        try(PreparedStatement stmt = Mockito.mock(PreparedStatement.class)){
+            Mockito.when(conn.prepareStatement(Mockito.anyString())).thenReturn(stmt);
+            EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
+            Employee employee = new Employee("Jonas", "Jonukas", "Jonaitis");
+            employeeDAO.createEmployee(employee);
 
-        employeeDAO.createEmployee(employee);
-       // assertThat(???);
+            Mockito.verify(stmt).setString(1, "Jonas");
+            Mockito.verify(stmt).setString(2, "Jonukas");
+            Mockito.verify(stmt).setString(3, "Jonaitis");
+            Mockito.verify(stmt).execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
+//EmployeeDAO employeeDAO = new EmployeeDAOImpl(Mockito.mock(Connection.class));
+//Employee employee = new Employee("Jonas", "Jonukas", "Jonaitis");
 
+//employeeDAO.createEmployee(employee);
+// assertThat(???);
     //assertEntityCreatedInDB(employee);
 //Mockito.verify(employeeDAO, Mockito.times(1)).createEmployee(employee);
 
