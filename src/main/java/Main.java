@@ -88,7 +88,7 @@ public class Main {
         //insertShiftCode(conn);
         //insertShiftLine(conn);
         //insertSchedule(conn);
-        insertScheduleLines(conn);
+        //insertScheduleLines(conn);
     }
 
     private static void insertSchedule(Connection conn) {
