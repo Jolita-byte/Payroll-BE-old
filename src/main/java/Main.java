@@ -1,12 +1,12 @@
 //import static Calculations.Average.calculateAverage;
 
-import Employee.Employee;
-import Employee.*;
-import General.Code;
-import General.CodeDAO;
-import General.CodeDAOImpl;
-import PayrollConnections.PayrollConnection;
-import Schedule.*;
+import employee.Employee;
+import employee.*;
+import general.Code;
+import general.CodeDAO;
+import general.CodeDAOImpl;
+import payrollConnections.PayrollConnection;
+import schedule.*;
 
 
 import java.sql.Connection;

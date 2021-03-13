@@ -1,0 +1,74 @@
+package schedule;
+
+import java.time.LocalTime;
+
+public class ShiftLine {
+    private Integer id;
+    private String shiftCodeID;
+    private String timeCodeID;
+    private LocalTime begin;
+    private LocalTime end;
+
+    /**
+     *
+     * @param id
+     * @param shiftCodeID
+     * @param timeCodeID
+     * @param begin
+     * @param end
+     */
+    public ShiftLine(Integer id, String shiftCodeID, String timeCodeID, LocalTime begin, LocalTime end) {
+        this.id = id;
+        this.shiftCodeID = shiftCodeID;
+        this.timeCodeID = timeCodeID;
+        this.begin = begin;
+        this.end = end;
+    }
+
+    public ShiftLine(String shiftCodeID, String timeCodeID, LocalTime begin, LocalTime end) {
+        this.shiftCodeID = shiftCodeID;
+        this.timeCodeID = timeCodeID;
+        this.begin = begin;
+        this.end = end;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getShiftCodeID() {
+        return shiftCodeID;
+    }
+
+    public void setShiftCodeID(String shiftCodeID) {
+        this.shiftCodeID = shiftCodeID;
+    }
+
+    public String getTimeCodeID() {
+        return timeCodeID;
+    }
+
+    public void setTimeCodeID(String timeCodeID) {
+        this.timeCodeID = timeCodeID;
+    }
+
+    public LocalTime getBegin() {
+        return begin;
+    }
+
+    public void setBegin(LocalTime begin) {
+        this.begin = begin;
+    }
+
+    public LocalTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalTime end) {
+        this.end = end;
+    }
+}
