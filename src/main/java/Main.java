@@ -168,6 +168,8 @@ public class Main {
     private static void insertEmployeeScheduleLine(Connection conn){
         EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
         CodeDAO codeDAO = new CodeDAOImpl(conn, "SHIFT_CODE");
+        ContractDAO contractDAO = new ContractDAOImpl(conn);
+        //List<ContractContractLine> contractContractLines = contractDAO.findEmployeeContractContractLinesByDate()
         //CodeDAO scheduleCode = new CodeDAOImpl(conn, "SCHEDULE_CODE");
         //ShiftLineDAO shiftLineDAO = new ShiftLineDAOImpl(conn);
         SchedulePatternLineDAO schedulePatternLineDAO = new SchedulePatternLineDAOImpl(conn);
@@ -175,11 +177,12 @@ public class Main {
 
 
         EmployeeScheduleLineDAO employeeScheduleLineDAO = new EmployeeScheduleLineDAOImpl(conn);
-        ScheduleService scheduleService = new ScheduleService(employeeDAO.readEmployee(2), codeDAO, employeeScheduleLineDAO);
+        ScheduleService scheduleService = new ScheduleService(employeeDAO.readEmployee(2), contractDAO, codeDAO, schedulePatternLineDAO, employeeScheduleLineDAO);
+        scheduleService.fillEmployeeSchedule(employeeDAO.readEmployee(2).getId(),LocalDate.of(2021, 1, 1),LocalDate.of(2021, 1, 31));
         //List<EmployeeScheduleLine> employeeScheduleLines = scheduleService.fillEmployeeScheduleLines(LocalDate.of(2021,01,07), codeDAO.readCode("N12"));
         //System.out.println(scheduleService.getPatternFirstDate(schedulePatternLinesA5));
-        List<SchedulePatternLine> patternLine = scheduleService.getPatternline(LocalDate.of(2021, 03, 12), schedulePatternLinesA5);
-        System.out.println(patternLine);
+        //List<SchedulePatternLine> patternLine = scheduleService.getPatternlineOnDate(LocalDate.of(2021, 03, 12), schedulePatternLinesA5);
+        //System.out.println(patternLine);
         //employeeScheduleLines.forEach(x -> employeeScheduleLineDAO.createEmployeeScheduleLine(x));
         //employeeScheduleLineDAO.createEmployeeScheduleLine(employeeScheduleLine1);
         //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 8,0, 0), LocalDateTime.of(2021, 1, 2, 12,0, 0)));

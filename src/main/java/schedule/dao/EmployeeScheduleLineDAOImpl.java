@@ -15,17 +15,19 @@ public class EmployeeScheduleLineDAOImpl implements EmployeeScheduleLineDAO {
     public void createEmployeeScheduleLine(EmployeeScheduleLine employeeScheduleLine) {
         String sql = "INSERT INTO EMPLOYEE_SCHEDULE_ENTRY (" +
                 "Employee_ID," +
+                "Contract_ID, " +
                 "Shift_Code_ID, " +
                 "Time_Code_ID, " +
                 "StartDateTime, " +
                 "EndDateTime" +
-                ") VALUES (?, ?, ?, ?, ?)";
+                ") VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, employeeScheduleLine.getEmployeeID());
-            statement.setString(2, employeeScheduleLine.getShiftCodeID());
-            statement.setString(3, employeeScheduleLine.getTimeCodeID());
-            statement.setTimestamp(4, Timestamp.valueOf(employeeScheduleLine.getStartDateTime()));
-            statement.setTimestamp(5, Timestamp.valueOf(employeeScheduleLine.getEndDateTime()));
+            statement.setInt(2, employeeScheduleLine.getContractID());
+            statement.setString(3, employeeScheduleLine.getShiftCodeID());
+            statement.setString(4, employeeScheduleLine.getTimeCodeID());
+            statement.setTimestamp(5, Timestamp.valueOf(employeeScheduleLine.getStartDateTime()));
+            statement.setTimestamp(6, Timestamp.valueOf(employeeScheduleLine.getEndDateTime()));
             statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

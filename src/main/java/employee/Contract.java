@@ -7,21 +7,21 @@ public class Contract {
     private Integer employeeID;
     private LocalDate EmploymentDate;
     private LocalDate ContractSignDate;
-    private LocalDate TerminaitionDate;
+    private LocalDate TerminationDate;
 
-    public Contract(Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
+    public Contract(Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminationDate) {
         this.employeeID = employeeID;
         EmploymentDate = employmentDate;
         ContractSignDate = contractSignDate;
-        TerminaitionDate = terminaitionDate;
+        TerminationDate = terminationDate;
     }
 
-    public Contract(Integer id, Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminaitionDate) {
+    public Contract(Integer id, Integer employeeID, LocalDate employmentDate, LocalDate contractSignDate, LocalDate terminationDate) {
         this.id = id;
         this.employeeID = employeeID;
         EmploymentDate = employmentDate;
         ContractSignDate = contractSignDate;
-        TerminaitionDate = terminaitionDate;
+        TerminationDate = terminationDate;
     }
 
     public Integer getId() {
@@ -56,11 +56,22 @@ public class Contract {
         ContractSignDate = contractSignDate;
     }
 
-    public LocalDate getTerminaitionDate() {
-        return TerminaitionDate;
+    public LocalDate getTerminationDate() {
+        return TerminationDate;
     }
 
-    public void setTerminaitionDate(LocalDate terminaitionDate) {
-        TerminaitionDate = terminaitionDate;
+    public void setTerminationDate(LocalDate terminationDate) {
+        TerminationDate = terminationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", employeeID=" + employeeID +
+                ", EmploymentDate=" + EmploymentDate +
+                ", ContractSignDate=" + ContractSignDate +
+                ", TerminationDate=" + TerminationDate +
+                '}';
     }
 }

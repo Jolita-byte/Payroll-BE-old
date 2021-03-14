@@ -99,4 +99,17 @@ public class ContractLine {
     public void setAmount(float amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "ContractLine{" +
+                "contractID=" + contractID +
+                ", startDate=" + startDate +
+                ", scheduleID='" + scheduleID + '\'' +
+                ", positionID='" + positionID + '\'' +
+                ", staff=" + staff +
+                ", amountType=" + amountType +
+                ", amount=" + amount +
+                '}';
+    }
 }

@@ -100,12 +100,12 @@ public class CodeDAOImpl implements CodeDAO {
     }
 
     @Override
-    public List<ShiftLine> findShiftLines(Code code) {
+    public List<ShiftLine> findShiftLines(String code) {
         List<ShiftLine> shiftLines = new ArrayList<>();
         String sql = "SELECT * FROM SHIFT_LINE WHERE Shift_Code_ID = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, code.getId());
+            statement.setString(1, code);
             if (!statement.execute()) {
                 return null;
             }

@@ -2,6 +2,8 @@ package employee;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ContractDAOImpl implements ContractDAO {
@@ -189,6 +191,45 @@ public class ContractDAOImpl implements ContractDAO {
         return null;
     }
 
+    @Override
+    public List<ContractContractLine> findEmployeeContractContractLinesByDate(Integer employeeID, LocalDate date) {
+        List<ContractContractLine> contractContractLines = new ArrayList<>();
+        String sql = "SELECT ccl.* FROM CONTRACT_CONTRACT_LINE AS ccl INNER JOIN (SELECT Contract_ID, max(StartDate) as StartDate FROM CONTRACT_CONTRACT_LINE WHERE Employee_ID = ? AND StartDate < ? GROUP BY Contract_ID) AS max ON ccl.Contract_ID = max.Contract_ID AND ccl.StartDate = max.StartDate";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, employeeID);
+            statement.setDate(2, Date.valueOf(date));
+            if (!statement.execute()) {
+                return null;
+            }
+
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                Integer contractID = resultSet.getInt("Contract_ID");
+                LocalDate employmentDate = resultSet.getDate("EmploymentDate").toLocalDate();
+                LocalDate contractSignDate = resultSet.getDate("ContractSignDate").toLocalDate();
+                LocalDate terminationDate = (resultSet.getDate("Termination date"))!=null
+                        ?resultSet.getDate("Termination date").toLocalDate()
+                        :null;
+
+                LocalDate startDate = resultSet.getDate("StartDate").toLocalDate();
+                String scheduleCodeID = resultSet.getString("Schedule_Code_ID");
+                String positionCodeID = resultSet.getString("Position_Code_ID");
+                Integer staff = resultSet.getInt("Staff");
+                ContractLine.AmountType amountType = ContractLine.AmountType.valueOf(resultSet.getString("AmountType").toUpperCase());
+                float amount = resultSet.getFloat("Amount");
+
+                contractContractLines.add(new ContractContractLine(
+                        new Contract(contractID, employeeID, employmentDate, contractSignDate, terminationDate),
+                        new ContractLine(contractID, startDate, scheduleCodeID, positionCodeID, staff, amountType, amount)));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return contractContractLines;
+    }
 
 
 }

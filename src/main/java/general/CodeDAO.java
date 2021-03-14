@@ -12,6 +12,6 @@ public interface CodeDAO {
     void deleteCode(String id);
     Optional<Code> findAllCodes();
 
-    List<ShiftLine> findShiftLines(Code code);
+    List<ShiftLine> findShiftLines(String code);
 
 }

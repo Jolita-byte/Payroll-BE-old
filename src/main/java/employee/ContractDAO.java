@@ -1,6 +1,7 @@
 package employee;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface ContractDAO {
@@ -11,4 +12,5 @@ public interface ContractDAO {
     void terminateContract(LocalDate terminationDate);
     Optional<ContractLine> findContractLineByPK(int contractID, LocalDate startDate);
     ContractLine findContractLineByDate(Integer employeeID, LocalDate date);
+    List<ContractContractLine> findEmployeeContractContractLinesByDate(Integer employeeID, LocalDate date);
 }
