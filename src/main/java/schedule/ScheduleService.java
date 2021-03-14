@@ -6,12 +6,17 @@ import general.CodeDAO;
 import schedule.dao.EmployeeScheduleLineDAO;
 import schedule.dao.ShiftLineDAO;
 import schedule.entity.EmployeeScheduleLine;
+import schedule.entity.SchedulePatternLine;
 import schedule.entity.ShiftLine;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class ScheduleService {
@@ -44,7 +49,30 @@ public class ScheduleService {
 
     //}
 
+    public List<SchedulePatternLine> getPatternline (LocalDate date, List<SchedulePatternLine> schedulePatternLines){
+        LocalDate patternFirstDate = getPatternFirstDate(schedulePatternLines);
+        Long diff = Math.abs(DAYS.between(date, patternFirstDate));
+        Long patternLineNo = diff % getPatternDuration(schedulePatternLines);
+        LocalDate patternLineDate = DAYS.addTo(patternFirstDate, patternLineNo);
+        return schedulePatternLines
+                .stream()
+                .filter(x -> x.getInitialDate().isEqual(patternLineDate))
+                .collect(Collectors.toList());
+    }
 
+    public LocalDate getPatternFirstDate(List<SchedulePatternLine> schedulePatternLines){
+        return schedulePatternLines
+                .stream()
+                .min(Comparator.comparing(SchedulePatternLine::getInitialDate))
+                .get().getInitialDate();
+    }
+
+    private int getPatternDuration (List<SchedulePatternLine> schedulePatternLines){
+        return (int) schedulePatternLines
+                .stream()
+                .map(x -> x.getInitialDate())
+                .distinct().count();
+    }
 
     public List<EmployeeScheduleLine> fillEmployeeScheduleLines(LocalDate date, Code shift){
         return codeDAO

@@ -4,6 +4,8 @@ import schedule.entity.SchedulePatternLine;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class SchedulePatternLineDAOImpl implements SchedulePatternLineDAO {
@@ -31,13 +33,13 @@ public class SchedulePatternLineDAOImpl implements SchedulePatternLineDAO {
     }
 
     @Override
-    public Optional<SchedulePatternLine> readSchedulePatternLine(Integer id) {
+    public SchedulePatternLine readSchedulePatternLine(Integer id) {
         String sql = "SELECT * FROM SCHEDULE_PATTERN_LINE WHERE ID = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             if (!statement.execute()) {
-                return Optional.empty();
+                return null;
             }
 
             ResultSet resultSet = statement.getResultSet();
@@ -45,14 +47,14 @@ public class SchedulePatternLineDAOImpl implements SchedulePatternLineDAO {
                 String scheduleCodeID = resultSet.getString("Schedule_Code_ID");
                 LocalDate initialDate = resultSet.getDate("InitialDate").toLocalDate();
                 String shiftCodeID = resultSet.getString("Shift_Code_ID");
-                return Optional.of(new SchedulePatternLine(id, scheduleCodeID, initialDate, shiftCodeID));
+                return new SchedulePatternLine(id, scheduleCodeID, initialDate, shiftCodeID);
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -81,5 +83,31 @@ public class SchedulePatternLineDAOImpl implements SchedulePatternLineDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public List<SchedulePatternLine> getAllSchedulePatternLines(String scheduleCodeID) {
+        List<SchedulePatternLine> schedulePatternLines = new ArrayList<>();
+        String sql = "SELECT * FROM SCHEDULE_PATTERN_LINE WHERE Schedule_Code_ID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, scheduleCodeID);
+            if (!statement.execute()) {
+                return null;
+            }
+
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("ID");
+                LocalDate initialDate = resultSet.getDate("InitialDate").toLocalDate();
+                String shiftCodeID = resultSet.getString("Shift_Code_ID");
+                schedulePatternLines.add(new SchedulePatternLine(id, scheduleCodeID, initialDate, shiftCodeID));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return schedulePatternLines;
     }
 }

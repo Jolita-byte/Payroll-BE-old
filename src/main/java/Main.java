@@ -168,11 +168,19 @@ public class Main {
     private static void insertEmployeeScheduleLine(Connection conn){
         EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
         CodeDAO codeDAO = new CodeDAOImpl(conn, "SHIFT_CODE");
-        ShiftLineDAO shiftLineDAO = new ShiftLineDAOImpl(conn);
+        //CodeDAO scheduleCode = new CodeDAOImpl(conn, "SCHEDULE_CODE");
+        //ShiftLineDAO shiftLineDAO = new ShiftLineDAOImpl(conn);
+        SchedulePatternLineDAO schedulePatternLineDAO = new SchedulePatternLineDAOImpl(conn);
+        List<SchedulePatternLine> schedulePatternLinesA5 = schedulePatternLineDAO.getAllSchedulePatternLines("A5");
+
+
         EmployeeScheduleLineDAO employeeScheduleLineDAO = new EmployeeScheduleLineDAOImpl(conn);
         ScheduleService scheduleService = new ScheduleService(employeeDAO.readEmployee(2), codeDAO, employeeScheduleLineDAO);
-        List<EmployeeScheduleLine> employeeScheduleLines = scheduleService.fillEmployeeScheduleLines(LocalDate.of(2021,01,07), codeDAO.readCode("N12"));
-        employeeScheduleLines.forEach(x -> employeeScheduleLineDAO.createEmployeeScheduleLine(x));
+        //List<EmployeeScheduleLine> employeeScheduleLines = scheduleService.fillEmployeeScheduleLines(LocalDate.of(2021,01,07), codeDAO.readCode("N12"));
+        //System.out.println(scheduleService.getPatternFirstDate(schedulePatternLinesA5));
+        List<SchedulePatternLine> patternLine = scheduleService.getPatternline(LocalDate.of(2021, 03, 12), schedulePatternLinesA5);
+        System.out.println(patternLine);
+        //employeeScheduleLines.forEach(x -> employeeScheduleLineDAO.createEmployeeScheduleLine(x));
         //employeeScheduleLineDAO.createEmployeeScheduleLine(employeeScheduleLine1);
         //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 8,0, 0), LocalDateTime.of(2021, 1, 2, 12,0, 0)));
         //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 13,0, 0), LocalDateTime.of(2021, 1, 2, 17,0, 0)));

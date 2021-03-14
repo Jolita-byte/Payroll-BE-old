@@ -52,4 +52,14 @@ public class SchedulePatternLine {
     public void setShiftCodeID(String shiftCodeID) {
         this.shiftCodeID = shiftCodeID;
     }
+
+    @Override
+    public String toString() {
+        return "SchedulePatternLine{" +
+                "id=" + id +
+                ", scheduleCodeID='" + scheduleCodeID + '\'' +
+                ", initialDate=" + initialDate +
+                ", shiftCodeID='" + shiftCodeID + '\'' +
+                '}';
+    }
 }
