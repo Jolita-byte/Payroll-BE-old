@@ -5,7 +5,7 @@ public interface EmployeeDAO {
     //void createTable();
     //void deleteTable();
     void createEmployee(Employee employee);
-    void readEmployee(Integer id);
+    Employee readEmployee(Integer id);
     void updateEmployee(Integer id, Employee employee);
     void deleteEmployee(Integer id);
 

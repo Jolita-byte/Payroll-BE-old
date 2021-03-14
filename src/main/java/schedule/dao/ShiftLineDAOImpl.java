@@ -1,4 +1,6 @@
-package schedule;
+package schedule.dao;
+
+import schedule.entity.ShiftLine;
 
 import java.sql.*;
 import java.time.LocalTime;
@@ -31,13 +33,13 @@ public class ShiftLineDAOImpl implements ShiftLineDAO {
     }
 
     @Override
-    public Optional<ShiftLine> readShiftLine(Integer id) {
+    public ShiftLine readShiftLine(Integer id) {
         String sql = "SELECT * FROM SHIFT_LINE WHERE ID = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             if (!statement.execute()) {
-                return Optional.empty();
+                return null;
             }
 
             ResultSet resultSet = statement.getResultSet();
@@ -46,14 +48,14 @@ public class ShiftLineDAOImpl implements ShiftLineDAO {
                 String timeCodeID = resultSet.getString("Time_Code_ID");
                 LocalTime begin = resultSet.getTime("Begin").toLocalTime();
                 LocalTime end = resultSet.getTime("End").toLocalTime();
-                return Optional.of(new ShiftLine(id, shiftCodeID, timeCodeID, begin, end));
+                return new ShiftLine(id, shiftCodeID, timeCodeID, begin, end);
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -84,5 +86,31 @@ public class ShiftLineDAOImpl implements ShiftLineDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public Optional<ShiftLine> findAll() {
+        String sql = "SELECT * FROM SHIFT_LINE";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            if (!statement.execute()) {
+                return Optional.empty();
+            }
+
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                Integer id = resultSet.getInt("ID");
+                String shiftCodeID = resultSet.getString("Shift_Code_ID");
+                String timeCodeID = resultSet.getString("Time_Code_ID");
+                LocalTime begin = resultSet.getTime("Begin").toLocalTime();
+                LocalTime end = resultSet.getTime("End").toLocalTime();
+                return Optional.of(new ShiftLine(id, shiftCodeID, timeCodeID, begin, end));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 }

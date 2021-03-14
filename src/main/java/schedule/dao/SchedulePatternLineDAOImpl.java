@@ -1,4 +1,6 @@
-package schedule;
+package schedule.dao;
+
+import schedule.entity.SchedulePatternLine;
 
 import java.sql.*;
 import java.time.LocalDate;

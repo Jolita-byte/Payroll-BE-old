@@ -6,13 +6,19 @@ import general.Code;
 import general.CodeDAO;
 import general.CodeDAOImpl;
 import payrollConnections.PayrollConnection;
-import schedule.*;
+import schedule.ScheduleService;
+import schedule.dao.*;
+import schedule.entity.EmployeeScheduleLine;
+import schedule.entity.SchedulePatternLine;
+import schedule.entity.ShiftLine;
 
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Main {
     //private static final String URL = "jdbc:mysql://localhost:3306/payroll";
@@ -26,7 +32,13 @@ public class Main {
         //try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
         //try (Connection conn = DriverManager.getConnection(PayrollConnection.getURL(), PayrollConnection.getUSER(), PayrollConnection.getPASSWORD())){
           try (Connection conn = PayrollConnection.getConnection())  {
-              insertCodes(conn);
+
+              //ContractDAO contractDAO = new ContractDAOImpl(conn);
+
+              //ScheduleFunctions.fillSchedule(2,)
+
+
+              //insertCodes(conn);
 
               //insertEmployee(conn);
 
@@ -34,7 +46,7 @@ public class Main {
               //insertContract(conn);
 
               //updateContract(conn);
-
+                insertEmployeeScheduleLine(conn);
 
 
           } catch (SQLException e) {
@@ -150,6 +162,20 @@ public class Main {
         shiftLineDAO.createShiftLine(new ShiftLine("N12", "DN", LocalTime.of(22,0), LocalTime.of(6,0)));
 */
         shiftLineDAO.createShiftLine(new ShiftLine("P", "P", LocalTime.of(0,0), LocalTime.of(0,0)));
+
+    }
+
+    private static void insertEmployeeScheduleLine(Connection conn){
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
+        CodeDAO codeDAO = new CodeDAOImpl(conn, "SHIFT_CODE");
+        ShiftLineDAO shiftLineDAO = new ShiftLineDAOImpl(conn);
+        EmployeeScheduleLineDAO employeeScheduleLineDAO = new EmployeeScheduleLineDAOImpl(conn);
+        ScheduleService scheduleService = new ScheduleService(employeeDAO.readEmployee(2), codeDAO, employeeScheduleLineDAO);
+        List<EmployeeScheduleLine> employeeScheduleLines = scheduleService.fillEmployeeScheduleLines(LocalDate.of(2021,01,07), codeDAO.readCode("N12"));
+        employeeScheduleLines.forEach(x -> employeeScheduleLineDAO.createEmployeeScheduleLine(x));
+        //employeeScheduleLineDAO.createEmployeeScheduleLine(employeeScheduleLine1);
+        //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 8,0, 0), LocalDateTime.of(2021, 1, 2, 12,0, 0)));
+        //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 13,0, 0), LocalDateTime.of(2021, 1, 2, 17,0, 0)));
 
     }
 

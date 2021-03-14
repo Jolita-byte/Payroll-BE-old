@@ -1,4 +1,4 @@
-package schedule;
+package schedule.entity;
 
 import java.time.LocalDateTime;
 
@@ -7,23 +7,23 @@ public class EmployeeScheduleLine {
     private Integer employeeID;
     private String shiftCodeID;
     private String timeCodeID;
-    private LocalDateTime beginDateTime;
+    private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
-    public EmployeeScheduleLine(Integer id, Integer employeeID, String shiftCodeID, String timeCodeID, LocalDateTime beginDateTime, LocalDateTime endDateTime) {
+    public EmployeeScheduleLine(Integer id, Integer employeeID, String shiftCodeID, String timeCodeID, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.id = id;
         this.employeeID = employeeID;
         this.shiftCodeID = shiftCodeID;
         this.timeCodeID = timeCodeID;
-        this.beginDateTime = beginDateTime;
+        this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
-    public EmployeeScheduleLine(Integer employeeID, String shiftCodeID, String timeCodeID, LocalDateTime beginDateTime, LocalDateTime endDateTime) {
+    public EmployeeScheduleLine(Integer employeeID, String shiftCodeID, String timeCodeID, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.employeeID = employeeID;
         this.shiftCodeID = shiftCodeID;
         this.timeCodeID = timeCodeID;
-        this.beginDateTime = beginDateTime;
+        this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
@@ -59,12 +59,12 @@ public class EmployeeScheduleLine {
         this.timeCodeID = timeCodeID;
     }
 
-    public LocalDateTime getBeginDateTime() {
-        return beginDateTime;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setBeginDateTime(LocalDateTime beginDateTime) {
-        this.beginDateTime = beginDateTime;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
     public LocalDateTime getEndDateTime() {

@@ -1,4 +1,4 @@
-package schedule;
+package schedule.entity;
 
 import java.time.LocalDate;
 

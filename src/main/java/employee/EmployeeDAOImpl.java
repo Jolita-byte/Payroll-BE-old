@@ -1,8 +1,7 @@
 package employee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Optional;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     private final Connection connection;
@@ -24,7 +23,28 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void readEmployee(Integer id) {
+    public Employee readEmployee(Integer id) {
+        String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            if (!statement.execute()) {
+                return null;
+            }
+
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                String name = resultSet.getString("Name");
+                String secondName = resultSet.getString("SecondName");
+                String surname = resultSet.getString("Surname");
+                return new Employee(id, name, secondName, surname);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
 
     }
 

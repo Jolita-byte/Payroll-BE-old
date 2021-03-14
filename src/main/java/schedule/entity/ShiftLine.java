@@ -1,4 +1,4 @@
-package schedule;
+package schedule.entity;
 
 import java.time.LocalTime;
 
@@ -70,5 +70,16 @@ public class ShiftLine {
 
     public void setEnd(LocalTime end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return "ShiftLine{" +
+                "id=" + id +
+                ", shiftCodeID='" + shiftCodeID + '\'' +
+                ", timeCodeID='" + timeCodeID + '\'' +
+                ", begin=" + begin +
+                ", end=" + end +
+                '}';
     }
 }
