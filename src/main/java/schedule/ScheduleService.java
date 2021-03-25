@@ -14,6 +14,7 @@ import schedule.entity.ShiftLine;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collector;
@@ -24,6 +25,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ScheduleService {
     private final Employee employee;
+    private List<EmployeeScheduleLine> employeeScheduleLines;
     private final ContractDAO contractDAO;
     private final CodeDAO codeDAO;
     private final SchedulePatternLineDAO schedulePatternLineDAO;
@@ -37,44 +39,40 @@ public class ScheduleService {
         this.codeDAO = codeDAO;
         this.schedulePatternLineDAO = schedulePatternLineDAO;
         this.employeeScheduleLineDAO = employeeScheduleLineDAO;
+        this.employeeScheduleLines = new ArrayList<>();
     }
 
-    public List<EmployeeScheduleLine> fillEmployeeSchedule(Integer employeeID, LocalDate begin, LocalDate end) {
-        List<EmployeeScheduleLine> employeeScheduleLines = null;
-        //System.out.println(contractDAO.findEmployeeContractContractLinesByDate(employeeID, begin));
-
+    public void fillEmployeeSchedule(Integer employeeID, LocalDate begin, LocalDate end) {
         for (LocalDate i = begin; (i.isBefore(end) || i.isEqual(end)); i = i.plusDays(1)) {
-            //System.out.println(i);
-            //System.out.println(begin.isEqual(end));
-            List<ContractContractLine> contractContractLines = contractDAO.findEmployeeContractContractLinesByDate(employeeID, i);
             LocalDate finalI = i;
-            contractContractLines.stream().forEach(x -> fillContractSchedule(finalI,x));
-            //fillEmployeeScheduleLines()
-            //System.out.println(contractDAO.findEmployeeContractContractLinesByDate(employeeID, i));
-
-
+            contractDAO
+                    .findEmployeeContractContractLinesByDate(employeeID, i)
+                    .stream()
+                    .forEach(x -> fillContractSchedule(finalI,x));
         }
-
-
-        return null;
     }
 
     public void fillContractSchedule(LocalDate date, ContractContractLine contractContractLine) {
-        List<SchedulePatternLine> schedulePatternLines = schedulePatternLineDAO.getAllSchedulePatternLines(contractContractLine.getContractLine().getScheduleID());
-        schedulePatternLines = getPatternlineOnDate(date,schedulePatternLines);
-        //List<EmployeeScheduleLine> employeeScheduleLines =
-        schedulePatternLines.stream().forEach(x -> fillSchedulePatternLine(contractContractLine.getContract().getId(), date, x));
+        schedulePatternLineDAO
+                .getPatternlinesOnDate(date, contractContractLine.getContractLine().getScheduleID())
+                .stream()
+                .forEach(x -> fillEmployeeScheduleLines(contractContractLine.getContract().getId(), date, x.getShiftCodeID()));
+                //.forEach(x -> fillSchedulePatternLine(contractContractLine.getContract().getId(), date, x));
 
-        //System.out.println(schedulePatternLines);
+
+        /*List<SchedulePatternLine> schedulePatternLines = schedulePatternLineDAO.getAllSchedulePatternLines(contractContractLine.getContractLine().getScheduleID());
+        schedulePatternLines = getPatternlineOnDate(date,schedulePatternLines);
+        schedulePatternLines.stream().forEach(x -> fillSchedulePatternLine(contractContractLine.getContract().getId(), date, x));
+*/
     }
 
-    public void fillSchedulePatternLine(Integer contractID, LocalDate date, SchedulePatternLine schedulePatternLine){
+/*    public void fillSchedulePatternLine(Integer contractID, LocalDate date, SchedulePatternLine schedulePatternLine){
         fillEmployeeScheduleLines(contractID, date,schedulePatternLine.getShiftCodeID());
         //System.out.println(employeeScheduleLines);
-    }
+    }*/
 
 
-    public List<SchedulePatternLine> getPatternlineOnDate(LocalDate date, List<SchedulePatternLine> schedulePatternLines) {
+/*    public List<SchedulePatternLine> getPatternlineOnDate(LocalDate date, List<SchedulePatternLine> schedulePatternLines) {
         LocalDate patternFirstDate = getPatternFirstDate(schedulePatternLines);
         Long diff = Math.abs(DAYS.between(date, patternFirstDate));
         Long patternLineNo = diff % getPatternDuration(schedulePatternLines);
@@ -83,21 +81,21 @@ public class ScheduleService {
                 .stream()
                 .filter(x -> x.getInitialDate().isEqual(patternLineDate))
                 .collect(Collectors.toList());
-    }
+    }*/
 
-    public LocalDate getPatternFirstDate(List<SchedulePatternLine> schedulePatternLines) {
+/*    public LocalDate getPatternFirstDate(List<SchedulePatternLine> schedulePatternLines) {
         return schedulePatternLines
                 .stream()
                 .min(Comparator.comparing(SchedulePatternLine::getInitialDate))
                 .get().getInitialDate();
-    }
+    }*/
 
-    private int getPatternDuration(List<SchedulePatternLine> schedulePatternLines) {
+/*    private int getPatternDuration(List<SchedulePatternLine> schedulePatternLines) {
         return (int) schedulePatternLines
                 .stream()
                 .map(x -> x.getInitialDate())
                 .distinct().count();
-    }
+    }*/
 
     public void fillEmployeeScheduleLines(Integer contractID, LocalDate date, String shift) {
         codeDAO
@@ -121,6 +119,8 @@ public class ScheduleService {
                 shiftLine.getTimeCodeID(),
                 startDateTime,
                 endDateTime);
+
+        //return employeeScheduleLine;
 
         employeeScheduleLineDAO.createEmployeeScheduleLine(employeeScheduleLine);
 

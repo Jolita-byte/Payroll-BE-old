@@ -194,7 +194,7 @@ public class ContractDAOImpl implements ContractDAO {
     @Override
     public List<ContractContractLine> findEmployeeContractContractLinesByDate(Integer employeeID, LocalDate date) {
         List<ContractContractLine> contractContractLines = new ArrayList<>();
-        String sql = "SELECT ccl.* FROM CONTRACT_CONTRACT_LINE AS ccl INNER JOIN (SELECT Contract_ID, max(StartDate) as StartDate FROM CONTRACT_CONTRACT_LINE WHERE Employee_ID = ? AND StartDate < ? GROUP BY Contract_ID) AS max ON ccl.Contract_ID = max.Contract_ID AND ccl.StartDate = max.StartDate";
+        String sql = "SELECT ccl.* FROM CONTRACT_CONTRACT_LINE AS ccl INNER JOIN (SELECT Contract_ID, max(StartDate) as StartDate FROM CONTRACT_CONTRACT_LINE WHERE Employee_ID = ? AND StartDate <= ? GROUP BY Contract_ID) AS max ON ccl.Contract_ID = max.Contract_ID AND ccl.StartDate = max.StartDate";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, employeeID);
