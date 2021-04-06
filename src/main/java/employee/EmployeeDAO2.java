@@ -1,6 +1,6 @@
 package employee;
 
-public interface EmployeeDAO {
+public interface EmployeeDAO2 {
 
     //void createTable();
     //void deleteTable();

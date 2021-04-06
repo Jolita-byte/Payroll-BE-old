@@ -15,7 +15,7 @@ class EmployeeDAOTest {
         Connection conn = Mockito.mock(Connection.class);
         try(PreparedStatement stmt = Mockito.mock(PreparedStatement.class)){
             Mockito.when(conn.prepareStatement(Mockito.anyString())).thenReturn(stmt);
-            EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
+            EmployeeDAO2 employeeDAO = new EmployeeDAOImpl(conn);
             Employee employee = new Employee("Jonas", "Jonukas", "Jonaitis");
             employeeDAO.createEmployee(employee);
 

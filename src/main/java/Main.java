@@ -1,7 +1,8 @@
 //import static Calculations.Average.calculateAverage;
 
 import employee.Employee;
-import employee.*;
+import DAO.*;
+import entity.ContractLineID;
 import general.Code;
 import general.CodeDAO;
 import general.CodeDAOImpl;
@@ -13,6 +14,7 @@ import schedule.entity.SchedulePatternLine;
 import schedule.entity.ShiftLine;
 
 
+import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -46,12 +48,27 @@ public class Main {
               //insertContract(conn);
 
               //updateContract(conn);
-                insertEmployeeScheduleLine(conn);
+               // insertEmployeeScheduleLine(conn);
 
 
           } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        HibernateProject hibernateProject = new HibernateProject();
+          EntityManager em = hibernateProject.getEntityManager();
+        EmployeeDAO employeeDAO = new EmployeeDAO(em);
+        System.out.println(employeeDAO.read(1));
+        System.out.println("------------");
+
+        ContractDAO contractDAO = new ContractDAO(em);
+        System.out.println(contractDAO.read(1));
+        System.out.println("------------");
+        ContractLineDAO contractLineDAO = new ContractLineDAO(em);
+        System.out.println(contractLineDAO.read(new ContractLineID(6, LocalDate.of(2021, 01,15))));
+
+
+
+
 /*        AmountCode ATL_DD = new AmountCode("ATL DD", AmountCode.Type.EARNING);
         AmountCode ATL_DD2 = new AmountCode("ATL DD", AmountCode.Type.EARNING);
         System.out.println(ATL_DD.equals(ATL_DD2));
@@ -60,7 +77,10 @@ public class Main {
         System.out.println(a.equals(b));*/
     }
 
-    private static void updateContract(Connection conn) {
+
+
+
+    /*private static void updateContract(Connection conn) {
         ContractDAO contractDAO = new ContractDAOImpl(conn);
 
         ContractLine contractLine2 = new ContractLine(null,null,null,null,1700f);
@@ -146,21 +166,21 @@ public class Main {
     private static void insertShiftCode(Connection conn){
         CodeDAO ShiftCodeDAO = new CodeDAOImpl(conn, "SHIFT_CODE");
 
-/*        ShiftCodeDAO.createCode(new Code("A", "Standartinė"));
+*//*        ShiftCodeDAO.createCode(new Code("A", "Standartinė"));
         ShiftCodeDAO.createCode(new Code("D12", "Dieninė"));
-        ShiftCodeDAO.createCode(new Code("N12", "Naktinė"));*/
+        ShiftCodeDAO.createCode(new Code("N12", "Naktinė"));*//*
         ShiftCodeDAO.createCode(new Code("P", "Poilsis"));
     }
 
     private static void insertShiftLine(Connection conn){
         ShiftLineDAO shiftLineDAO = new ShiftLineDAOImpl(conn);
-/*
+*//*
         shiftLineDAO.createShiftLine(new ShiftLine("A", "DD", LocalTime.of(8,0), LocalTime.of(12,0)));
         shiftLineDAO.createShiftLine(new ShiftLine("A", "DD", LocalTime.of(13,0), LocalTime.of(17,0)));
         shiftLineDAO.createShiftLine(new ShiftLine("D12", "DD", LocalTime.of(6,30), LocalTime.of(18,30)));
         shiftLineDAO.createShiftLine(new ShiftLine("N12", "DD", LocalTime.of(18,30), LocalTime.of(6,30)));
         shiftLineDAO.createShiftLine(new ShiftLine("N12", "DN", LocalTime.of(22,0), LocalTime.of(6,0)));
-*/
+*//*
         shiftLineDAO.createShiftLine(new ShiftLine("P", "P", LocalTime.of(0,0), LocalTime.of(0,0)));
 
     }
@@ -189,5 +209,5 @@ public class Main {
         //employeeScheduleLineDAO.createEmployeeScheduleLine(new EmployeeScheduleLine(2, "A", "DD", LocalDateTime.of(2021, 1, 2, 13,0, 0), LocalDateTime.of(2021, 1, 2, 17,0, 0)));
 
     }
-
+*/
 }

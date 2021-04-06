@@ -3,7 +3,7 @@ package employee;
 import java.sql.*;
 import java.util.Optional;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class EmployeeDAOImpl implements EmployeeDAO2 {
     private final Connection connection;
 
     public EmployeeDAOImpl(Connection connection) {
