@@ -1,6 +1,4 @@
-import entity.Contract;
-import entity.ContractLine;
-import entity.Employee;
+import entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -28,12 +26,18 @@ public class HibernateProject {
     public EntityManager getEntityManager() {
         SessionFactory sessionFactory = new Configuration()
                 .configure(HIBERNATE_CONFIGURATION)
-                .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(AmountCode.class)
                 .addAnnotatedClass(Contract.class)
                 .addAnnotatedClass(ContractLine.class)
-                //.addAnnotatedClass(Book.class)
-                //.addAnnotatedClass(AuthorBiography.class)
-                //.addAnnotatedClass(AuthorAlias.class)
+                .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(EmployeeAmount.class)
+                .addAnnotatedClass(EmployeeScheduleEntry.class)
+                .addAnnotatedClass(EmployeeTimeTableEntry.class)
+                .addAnnotatedClass(PositionCode.class)
+                .addAnnotatedClass(SchedulePatternLine.class)
+                .addAnnotatedClass(ShiftCode.class)
+                .addAnnotatedClass(ShiftLine.class)
+                .addAnnotatedClass(TimeCode.class)
                 .buildSessionFactory();
 
         return sessionFactory.createEntityManager();

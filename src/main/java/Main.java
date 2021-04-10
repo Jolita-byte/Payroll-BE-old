@@ -3,6 +3,7 @@
 import employee.Employee;
 import DAO.*;
 import entity.ContractLineID;
+import entity.EmployeeAmount;
 import general.Code;
 import general.CodeDAO;
 import general.CodeDAOImpl;
@@ -33,39 +34,52 @@ public class Main {
         //Class.forName("org.h2.Driver"); //pasitikrinam
         //try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
         //try (Connection conn = DriverManager.getConnection(PayrollConnection.getURL(), PayrollConnection.getUSER(), PayrollConnection.getPASSWORD())){
-          try (Connection conn = PayrollConnection.getConnection())  {
+        try (Connection conn = PayrollConnection.getConnection()) {
 
-              //ContractDAO contractDAO = new ContractDAOImpl(conn);
+            //ContractDAO contractDAO = new ContractDAOImpl(conn);
 
-              //ScheduleFunctions.fillSchedule(2,)
-
-
-              //insertCodes(conn);
-
-              //insertEmployee(conn);
+            //ScheduleFunctions.fillSchedule(2,)
 
 
-              //insertContract(conn);
+            //insertCodes(conn);
 
-              //updateContract(conn);
-               // insertEmployeeScheduleLine(conn);
+            //insertEmployee(conn);
 
 
-          } catch (SQLException e) {
+            //insertContract(conn);
+
+            //updateContract(conn);
+            // insertEmployeeScheduleLine(conn);
+
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         HibernateProject hibernateProject = new HibernateProject();
-          EntityManager em = hibernateProject.getEntityManager();
+        EntityManager em = hibernateProject.getEntityManager();
+
+        System.out.println("------------");
         EmployeeDAO employeeDAO = new EmployeeDAO(em);
         System.out.println(employeeDAO.read(1));
         System.out.println("------------");
-
         ContractDAO contractDAO = new ContractDAO(em);
         System.out.println(contractDAO.read(1));
         System.out.println("------------");
         ContractLineDAO contractLineDAO = new ContractLineDAO(em);
-        System.out.println(contractLineDAO.read(new ContractLineID(6, LocalDate.of(2021, 01,15))));
-
+        System.out.println(contractLineDAO.read(new ContractLineID(6, LocalDate.of(2021, 01, 15))));
+        System.out.println("------------");
+        EmployeeAmountDAO employeeAmountDAO = new EmployeeAmountDAO(em);
+        System.out.println(employeeAmountDAO.read(1));
+        System.out.println("------------");
+        AmountCodeDAO amountCodeDAO = new AmountCodeDAO(em);
+        System.out.println(amountCodeDAO.read("DD"));
+        System.out.println("------------");
+        EmployeeTimeTableEntryDAO employeeTimeTableEntryDAO = new EmployeeTimeTableEntryDAO(em);
+        System.out.println(employeeTimeTableEntryDAO.read(1));
+        System.out.println("------------");
+        System.out.println("------------");
+        System.out.println("------------");
 
 
 
