@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "contractLine")
+@Table(name = "contract_line")
 public class ContractLine {
     public enum AmountType{
         MONTHLY,

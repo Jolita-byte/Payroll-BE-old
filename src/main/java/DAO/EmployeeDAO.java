@@ -7,6 +7,4 @@ public class EmployeeDAO extends AbstractCRUDDAO<Employee, Integer> {
     public EmployeeDAO(EntityManager entityManager) {
         super(entityManager, Employee.class);
     }
-
-
 }
