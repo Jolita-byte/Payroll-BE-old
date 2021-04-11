@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "amount_code")
@@ -8,6 +9,9 @@ public class AmountCode {
     @Id
     private String id;
     private String description;
+
+    @OneToMany(mappedBy="id.amountCode")
+    private List<EmployeeAmount> employeeAmounts;
 
     public AmountCode() {
     }

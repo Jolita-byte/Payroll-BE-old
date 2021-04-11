@@ -1,13 +1,18 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "time_code")
 public class TimeCode {
     @Id
     private String id;
+
     private String description;
+
+    @OneToMany(mappedBy="timeCode")
+    private List<EmployeeTimesheetEntry> employeeTimeTableEntries;
 
     public TimeCode() {
     }

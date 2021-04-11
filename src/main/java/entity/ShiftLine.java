@@ -8,6 +8,7 @@ import java.time.LocalTime;
 public class ShiftLine {
 
     @Id
+    //@GeneratedValue
     private Integer id;
     private String shiftCodeID;
     private String timeCodeID;

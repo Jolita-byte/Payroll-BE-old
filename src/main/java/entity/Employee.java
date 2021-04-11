@@ -11,19 +11,22 @@ public class Employee {
     private Integer id;
 
     private String name;
-    private String secondName;
+    private String second_name;
     private String surname;
 
     @OneToMany(mappedBy="employee")
     private List<Contract> contracts;
 
+    @OneToMany(mappedBy="id.employee")
+    private List<EmployeeAmount> employeeAmountS;
+
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String secondName, String surname, List<Contract> contracts) {
+    public Employee(Integer id, String name, String second_name, String surname, List<Contract> contracts) {
         this.id = id;
         this.name = name;
-        this.secondName = secondName;
+        this.second_name = second_name;
         this.surname = surname;
         this.contracts = contracts;
     }
@@ -44,12 +47,12 @@ public class Employee {
         this.name = name;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getSecond_name() {
+        return second_name;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setSecond_name(String second_name) {
+        this.second_name = second_name;
     }
 
     public String getSurname() {
@@ -73,9 +76,9 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", secondName='" + secondName + '\'' +
+                ", second_name='" + second_name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", contracts=" + contracts.stream().map(Contract::toString).collect(Collectors.toList()) +
+                ", contracts=" + contracts +
                 '}';
     }
 }

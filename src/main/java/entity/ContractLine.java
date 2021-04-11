@@ -1,9 +1,6 @@
 package entity;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.time.LocalDate;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "contract_line")
@@ -13,18 +10,31 @@ public class ContractLine {
         HOURLY,
     }
 
-    //private Integer contractID;
-    //private LocalDate startDate;
     @EmbeddedId
     private ContractLineID id;
 
-    private String scheduleID;
-    private String positionID;
+    @ManyToOne
+    @JoinColumn(name="schedule_code_id", nullable=false)
+    private ScheduleCode scheduleCode;
+
+    @ManyToOne
+    @JoinColumn(name="position_code_id", nullable=false)
+    private PositionCode positionCode;
+
     private Integer staff;
-    private employee.ContractLine.AmountType amountType;
+    private ContractLine.AmountType amount_type;
     private Float amount;
 
     public ContractLine() {
+    }
+
+    public ContractLine(ContractLineID id, ScheduleCode scheduleCode, PositionCode positionCode, Integer staff, ContractLine.AmountType amount_type, Float amount) {
+        this.id = id;
+        this.scheduleCode = scheduleCode;
+        this.positionCode = positionCode;
+        this.staff = staff;
+        this.amount_type = amount_type;
+        this.amount = amount;
     }
 
     public ContractLineID getId() {
@@ -35,20 +45,20 @@ public class ContractLine {
         this.id = id;
     }
 
-    public String getScheduleID() {
-        return scheduleID;
+    public ScheduleCode getScheduleCode() {
+        return scheduleCode;
     }
 
-    public void setScheduleID(String scheduleID) {
-        this.scheduleID = scheduleID;
+    public void setScheduleCode(ScheduleCode scheduleCode) {
+        this.scheduleCode = scheduleCode;
     }
 
-    public String getPositionID() {
-        return positionID;
+    public PositionCode getPositionCode() {
+        return positionCode;
     }
 
-    public void setPositionID(String positionID) {
-        this.positionID = positionID;
+    public void setPositionCode(PositionCode positionCode) {
+        this.positionCode = positionCode;
     }
 
     public Integer getStaff() {
@@ -59,12 +69,12 @@ public class ContractLine {
         this.staff = staff;
     }
 
-    public employee.ContractLine.AmountType getAmountType() {
-        return amountType;
+    public ContractLine.AmountType getAmount_type() {
+        return amount_type;
     }
 
-    public void setAmountType(employee.ContractLine.AmountType amountType) {
-        this.amountType = amountType;
+    public void setAmount_type(ContractLine.AmountType amount_type) {
+        this.amount_type = amount_type;
     }
 
     public Float getAmount() {
@@ -79,10 +89,10 @@ public class ContractLine {
     public String toString() {
         return "ContractLine{" +
                 "id=" + id +
-                ", scheduleID='" + scheduleID + '\'' +
-                ", positionID='" + positionID + '\'' +
+                ", scheduleCode=" + scheduleCode +
+                ", positionCode=" + positionCode +
                 ", staff=" + staff +
-                ", amountType=" + amountType +
+                ", amount_type=" + amount_type +
                 ", amount=" + amount +
                 '}';
     }

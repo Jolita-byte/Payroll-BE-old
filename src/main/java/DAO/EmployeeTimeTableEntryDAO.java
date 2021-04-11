@@ -1,11 +1,11 @@
 package DAO;
 
-import entity.EmployeeTimeTableEntry;
+import entity.EmployeeTimesheetEntry;
 
 import javax.persistence.EntityManager;
 
-public class EmployeeTimeTableEntryDAO extends AbstractCRUDDAO<EmployeeTimeTableEntry, Integer>{
+public class EmployeeTimeTableEntryDAO extends AbstractCRUDDAO<EmployeeTimesheetEntry, Integer>{
     public EmployeeTimeTableEntryDAO(EntityManager entityManager) {
-        super(entityManager, EmployeeTimeTableEntry.class);
+        super(entityManager, EmployeeTimesheetEntry.class);
     }
 }

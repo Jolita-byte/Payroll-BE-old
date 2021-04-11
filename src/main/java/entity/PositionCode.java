@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "position_code")
@@ -9,12 +10,16 @@ public class PositionCode {
     private String id;
     private String description;
 
+    @OneToMany(mappedBy="positionCode")
+    private List<ContractLine> contractLines;
+
     public PositionCode() {
     }
 
-    public PositionCode(String id, String description) {
+    public PositionCode(String id, String description, List<ContractLine> contractLines) {
         this.id = id;
         this.description = description;
+        this.contractLines = contractLines;
     }
 
     public String getId() {
@@ -33,11 +38,20 @@ public class PositionCode {
         this.description = description;
     }
 
+    public List<ContractLine> getContractLines() {
+        return contractLines;
+    }
+
+    public void setContractLines(List<ContractLine> contractLines) {
+        this.contractLines = contractLines;
+    }
+
     @Override
     public String toString() {
         return "PositionCode{" +
                 "id='" + id + '\'' +
                 ", description='" + description + '\'' +
+                ", contractLines=" + contractLines +
                 '}';
     }
 }

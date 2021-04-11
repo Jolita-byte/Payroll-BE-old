@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "schedule_code")
@@ -8,6 +9,9 @@ public class ScheduleCode {
     @Id
     private String id;
     private String description;
+
+    @OneToMany(mappedBy="scheduleCode")
+    private List<ContractLine> contractLines;
 
     public ScheduleCode() {
     }
@@ -33,11 +37,13 @@ public class ScheduleCode {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "ScheduleCode{" +
-                "id='" + id + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public List<ContractLine> getContractLines() {
+        return contractLines;
     }
+
+    public void setContractLines(List<ContractLine> contractLines) {
+        this.contractLines = contractLines;
+    }
+
+
 }
