@@ -15,23 +15,26 @@ public class ContractLine {
 
     @ManyToOne
     @JoinColumn(name="schedule_code_id", nullable=false)
-    private ScheduleCode scheduleCode;
+    private ScheduleCode schedule_code;
 
     @ManyToOne
     @JoinColumn(name="position_code_id", nullable=false)
-    private PositionCode positionCode;
+    private PositionCode position_code;
 
     private Integer staff;
+
+    @Enumerated(EnumType.STRING)
     private ContractLine.AmountType amount_type;
+
     private Float amount;
 
     public ContractLine() {
     }
 
-    public ContractLine(ContractLineID id, ScheduleCode scheduleCode, PositionCode positionCode, Integer staff, ContractLine.AmountType amount_type, Float amount) {
+    public ContractLine(ContractLineID id, ScheduleCode schedule_code, PositionCode position_code, Integer staff, AmountType amount_type, Float amount) {
         this.id = id;
-        this.scheduleCode = scheduleCode;
-        this.positionCode = positionCode;
+        this.schedule_code = schedule_code;
+        this.position_code = position_code;
         this.staff = staff;
         this.amount_type = amount_type;
         this.amount = amount;
@@ -45,20 +48,20 @@ public class ContractLine {
         this.id = id;
     }
 
-    public ScheduleCode getScheduleCode() {
-        return scheduleCode;
+    public ScheduleCode getSchedule_code() {
+        return schedule_code;
     }
 
-    public void setScheduleCode(ScheduleCode scheduleCode) {
-        this.scheduleCode = scheduleCode;
+    public void setSchedule_code(ScheduleCode schedule_code) {
+        this.schedule_code = schedule_code;
     }
 
-    public PositionCode getPositionCode() {
-        return positionCode;
+    public PositionCode getPosition_code() {
+        return position_code;
     }
 
-    public void setPositionCode(PositionCode positionCode) {
-        this.positionCode = positionCode;
+    public void setPosition_code(PositionCode position_code) {
+        this.position_code = position_code;
     }
 
     public Integer getStaff() {
@@ -69,11 +72,11 @@ public class ContractLine {
         this.staff = staff;
     }
 
-    public ContractLine.AmountType getAmount_type() {
+    public AmountType getAmount_type() {
         return amount_type;
     }
 
-    public void setAmount_type(ContractLine.AmountType amount_type) {
+    public void setAmount_type(AmountType amount_type) {
         this.amount_type = amount_type;
     }
 
@@ -89,8 +92,8 @@ public class ContractLine {
     public String toString() {
         return "ContractLine{" +
                 "id=" + id +
-                ", scheduleCode=" + scheduleCode +
-                ", positionCode=" + positionCode +
+                ", schedule_code=" + schedule_code +
+                ", position_code=" + position_code +
                 ", staff=" + staff +
                 ", amount_type=" + amount_type +
                 ", amount=" + amount +

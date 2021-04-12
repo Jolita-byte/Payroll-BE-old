@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 @Table(name = "employee")
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -23,12 +24,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, String name, String second_name, String surname, List<Contract> contracts) {
-        this.id = id;
+    public Employee(String name, String second_name, String surname) {
         this.name = name;
         this.second_name = second_name;
         this.surname = surname;
-        this.contracts = contracts;
     }
 
     public Integer getId() {
@@ -78,7 +77,7 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", second_name='" + second_name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", contracts=" + contracts +
+                //", contracts=" + contracts +
                 '}';
     }
 }

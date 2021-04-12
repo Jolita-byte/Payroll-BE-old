@@ -10,16 +10,15 @@ public class PositionCode {
     private String id;
     private String description;
 
-    @OneToMany(mappedBy="positionCode")
+    @OneToMany(mappedBy="position_code")
     private List<ContractLine> contractLines;
 
     public PositionCode() {
     }
 
-    public PositionCode(String id, String description, List<ContractLine> contractLines) {
+    public PositionCode(String id, String description) {
         this.id = id;
         this.description = description;
-        this.contractLines = contractLines;
     }
 
     public String getId() {
@@ -51,7 +50,7 @@ public class PositionCode {
         return "PositionCode{" +
                 "id='" + id + '\'' +
                 ", description='" + description + '\'' +
-                ", contractLines=" + contractLines +
+                //", contractLines=" + contractLines +
                 '}';
     }
 }

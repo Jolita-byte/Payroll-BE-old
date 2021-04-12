@@ -1,26 +1,10 @@
-//import static Calculations.Average.calculateAverage;
-
 import DAO.*;
 import entity.*;
 import payrollConnections.PayrollConnection;
-/*import general.Code;
-import general.CodeDAO;
-import general.CodeDAOImpl;
-
-import schedule.ScheduleService;
-import schedule.dao.*;
-import schedule.entity.EmployeeScheduleLine;
-import schedule.entity.SchedulePatternLine;
-import schedule.entity.ShiftLine;*/
-
-
 import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
 
 public class Main {
     //private static final String URL = "jdbc:mysql://localhost:3306/payroll";
@@ -57,9 +41,9 @@ public class Main {
         HibernateProject hibernateProject = new HibernateProject();
         EntityManager em = hibernateProject.getEntityManager();
 
-        generate(em);
+        //new GenerateData().generateAllData(em);
 
-        //read();
+        read();
 
 
 
@@ -71,74 +55,7 @@ public class Main {
         System.out.println(a.equals(b));*/
     }
 
-    private static void generate(EntityManager em){
-        //createTimeCodes(em);
-        createShiftCodes(em);
-        createShiftLines(em);
-        createScheduleCodes(em);
-        createSchedulePatternLines(em);
 
-
-
-    }
-
-    private static void createTimeCodes(EntityManager em){
-        TimeCodeDAO timeCodeDAO = new TimeCodeDAO(em);
-        timeCodeDAO.create(new TimeCode("DD", "Darbas dieną"));
-        timeCodeDAO.create(new TimeCode("DN", "Darbas naktį"));
-        timeCodeDAO.create(new TimeCode("VD", "Viršvalandinis darbas"));
-        timeCodeDAO.create(new TimeCode("DP", "Darbas Poilsio dieną"));
-        timeCodeDAO.create(new TimeCode("DS", "Darbas Šventinę dieną"));
-        timeCodeDAO.create(new TimeCode("A", "Kasmetinės atostogos"));
-        timeCodeDAO.create(new TimeCode("M", "Papildoma poilsio diena auginatiems vaikus"));
-        timeCodeDAO.create(new TimeCode("P", "Poilsis"));
-        timeCodeDAO.create(new TimeCode("S", "Šventė"));
-    }
-
-    private static void createShiftCodes(EntityManager em){
-        ShiftCodeDAO shiftCodeDAO = new ShiftCodeDAO(em);
-        shiftCodeDAO.create(new ShiftCode("A", "Standartinė"));
-        shiftCodeDAO.create(new ShiftCode("D12", "Dieninė"));
-        shiftCodeDAO.create(new ShiftCode("N12", "Naktinė"));
-        shiftCodeDAO.create(new ShiftCode("P", "Poilsis"));
-    }
-
-    private static void createShiftLines(EntityManager em){
-        //reikia Embeded ID
-/*        ShiftLineDAO shiftLineDAO = new ShiftLineDAO(em);
-        shiftLineDAO.create(new ShiftLine("A", "DD", LocalTime.of(8,0), LocalTime.of(12,0)));
-        shiftLineDAO.create(new ShiftLine("A", "DD", LocalTime.of(13,0), LocalTime.of(17,0)));
-        shiftLineDAO.create(new ShiftLine("D12", "DD", LocalTime.of(6,30), LocalTime.of(18,30)));
-        shiftLineDAO.create(new ShiftLine("N12", "DD", LocalTime.of(18,30), LocalTime.of(6,30)));
-        shiftLineDAO.create(new ShiftLine("N12", "DN", LocalTime.of(22,0), LocalTime.of(6,0)));
-        shiftLineDAO.create(new ShiftLine("P", "P", LocalTime.of(0,0), LocalTime.of(0,0)));*/
-    }
-
-    private static void createScheduleCodes(EntityManager em) {
-        ScheduleCodeDAO scheduleCodeDAO = new ScheduleCodeDAO(em);
-        scheduleCodeDAO.create(new ScheduleCode("A5", "8 valandų per dieną, 5 dienų per savaitę"));
-        scheduleCodeDAO.create(new ScheduleCode("PAM_D", "Dieninė pamaina"));
-    }
-
-    private static void createSchedulePatternLines(EntityManager em) {
-        /*SchedulePatternLineDAO schedulePatternLineDAO = new SchedulePatternLineDAO(em);
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,4),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,5),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,6),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,7),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,8),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,9),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,10),"P"));
-
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,4),"D12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,5),"D12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,6),"N12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,7),"N12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,8),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,9),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,10),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,11),"P"));
-    */}
 
 
     private static void read() {
@@ -191,47 +108,6 @@ public class Main {
 
         contractDAO.updateContract(2, LocalDate.of(2021, 05, 10), contractLine2);
     }
-
-    private static void insertContract(Connection conn) {
-        ContractDAO contractDAO = new ContractDAOImpl(conn);
-
-        Contract contract = new Contract(2,LocalDate.of(2021,01,15), LocalDate.of(2021,01,10), null);
-        ContractLine contractLine = new ContractLine(LocalDate.of(2021,01,15),"A5", "INZ", 1, ContractLine.AmountType.MONTHLY, 2000f);
-
-
-        contractDAO.createContract(contract, contractLine);
-    }
-
-
-
-    private static void insertEmployee(Connection conn) {
-        EmployeeDAO employeeDAO = new EmployeeDAOImpl(conn);
-
-        employeeDAO.createEmployee(new Employee("Pirmas", "", "Pirmokas" ));
-        employeeDAO.createEmployee(new Employee("Antras", "", "Antrokas" ));
-        employeeDAO.createEmployee(new Employee("Trečias", "", "Trečiokas" ));
-        employeeDAO.createEmployee(new Employee("Ketvirtas", "", "Ketvirtokas" ));
-        employeeDAO.createEmployee(new Employee("Penktas", "", "Penktokas" ));
-        employeeDAO.createEmployee(new Employee("Šeštas", "", "Šeštokas" ));
-        employeeDAO.createEmployee(new Employee("Septintas", "", "Septintokas" ));
-        employeeDAO.createEmployee(new Employee("Aštuntas", "", "Aštuntokas" ));
-        employeeDAO.createEmployee(new Employee("Devintas", "", "Devintokas" ));
-        employeeDAO.createEmployee(new Employee("Dešimtas", "", "Dešimtokas" ));
-    }
-
-    public static void insertCodes(Connection conn){
-        //insertTimeCode(conn);
-        //insertShiftCode(conn);
-        //insertShiftLine(conn);
-        //insertSchedule(conn);
-        //insertScheduleLines(conn);
-    }
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,7 @@
 package schedule;
 
+import entity.*;
+
 import employee.ContractContractLine;
 import employee.ContractDAO;
 import employee.Employee;

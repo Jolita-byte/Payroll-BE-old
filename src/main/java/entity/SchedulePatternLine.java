@@ -8,19 +8,19 @@ import java.time.LocalDate;
 public class SchedulePatternLine {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String scheduleCodeID;
-    private LocalDate initialDate;
-    private String shiftCodeID;
+    private String schedule_code_id;
+    private LocalDate initial_date;
+    private String shift_code_id;
 
     public SchedulePatternLine() {
     }
 
-    public SchedulePatternLine(Integer id, String scheduleCodeID, LocalDate initialDate, String shiftCodeID) {
-        this.id = id;
-        this.scheduleCodeID = scheduleCodeID;
-        this.initialDate = initialDate;
-        this.shiftCodeID = shiftCodeID;
+    public SchedulePatternLine(String schedule_code_id, LocalDate initial_date, String shift_code_id) {
+        this.schedule_code_id = schedule_code_id;
+        this.initial_date = initial_date;
+        this.shift_code_id = shift_code_id;
     }
 
     public Integer getId() {
@@ -31,37 +31,37 @@ public class SchedulePatternLine {
         this.id = id;
     }
 
-    public String getScheduleCodeID() {
-        return scheduleCodeID;
+    public String getSchedule_code_id() {
+        return schedule_code_id;
     }
 
-    public void setScheduleCodeID(String scheduleCodeID) {
-        this.scheduleCodeID = scheduleCodeID;
+    public void setSchedule_code_id(String schedule_code_id) {
+        this.schedule_code_id = schedule_code_id;
     }
 
-    public LocalDate getInitialDate() {
-        return initialDate;
+    public LocalDate getInitial_date() {
+        return initial_date;
     }
 
-    public void setInitialDate(LocalDate initialDate) {
-        this.initialDate = initialDate;
+    public void setInitial_date(LocalDate initial_date) {
+        this.initial_date = initial_date;
     }
 
-    public String getShiftCodeID() {
-        return shiftCodeID;
+    public String getShift_code_id() {
+        return shift_code_id;
     }
 
-    public void setShiftCodeID(String shiftCodeID) {
-        this.shiftCodeID = shiftCodeID;
+    public void setShift_code_id(String shift_code_id) {
+        this.shift_code_id = shift_code_id;
     }
 
     @Override
     public String toString() {
         return "SchedulePatternLine{" +
                 "id=" + id +
-                ", scheduleCodeID='" + scheduleCodeID + '\'' +
-                ", initialDate=" + initialDate +
-                ", shiftCodeID='" + shiftCodeID + '\'' +
+                ", schedule_code_id='" + schedule_code_id + '\'' +
+                ", initial_date=" + initial_date +
+                ", shift_code_id='" + shift_code_id + '\'' +
                 '}';
     }
 }

@@ -8,20 +8,19 @@ import java.time.LocalTime;
 public class ShiftLine {
 
     @Id
-    //@GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String shiftCodeID;
-    private String timeCodeID;
+    private String shift_code_id;
+    private String time_code_id;
     private LocalTime begin;
     private LocalTime end;
 
     public ShiftLine() {
     }
 
-    public ShiftLine(Integer id, String shiftCodeID, String timeCodeID, LocalTime begin, LocalTime end) {
-        this.id = id;
-        this.shiftCodeID = shiftCodeID;
-        this.timeCodeID = timeCodeID;
+    public ShiftLine(String shift_code_id, String time_code_id, LocalTime begin, LocalTime end) {
+        this.shift_code_id = shift_code_id;
+        this.time_code_id = time_code_id;
         this.begin = begin;
         this.end = end;
     }
@@ -34,20 +33,20 @@ public class ShiftLine {
         this.id = id;
     }
 
-    public String getShiftCodeID() {
-        return shiftCodeID;
+    public String getShift_code_id() {
+        return shift_code_id;
     }
 
-    public void setShiftCodeID(String shiftCodeID) {
-        this.shiftCodeID = shiftCodeID;
+    public void setShift_code_id(String shift_code_id) {
+        this.shift_code_id = shift_code_id;
     }
 
-    public String getTimeCodeID() {
-        return timeCodeID;
+    public String getTime_code_id() {
+        return time_code_id;
     }
 
-    public void setTimeCodeID(String timeCodeID) {
-        this.timeCodeID = timeCodeID;
+    public void setTime_code_id(String time_code_id) {
+        this.time_code_id = time_code_id;
     }
 
     public LocalTime getBegin() {
@@ -64,17 +63,6 @@ public class ShiftLine {
 
     public void setEnd(LocalTime end) {
         this.end = end;
-    }
-
-    @Override
-    public String toString() {
-        return "ShiftLine{" +
-                "id=" + id +
-                ", shiftCodeID='" + shiftCodeID + '\'' +
-                ", timeCodeID='" + timeCodeID + '\'' +
-                ", begin=" + begin +
-                ", end=" + end +
-                '}';
     }
 }
 

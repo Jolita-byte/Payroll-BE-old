@@ -10,7 +10,7 @@ public class ScheduleCode {
     private String id;
     private String description;
 
-    @OneToMany(mappedBy="scheduleCode")
+    @OneToMany(mappedBy="schedule_code")
     private List<ContractLine> contractLines;
 
     public ScheduleCode() {

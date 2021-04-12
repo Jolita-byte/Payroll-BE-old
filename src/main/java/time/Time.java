@@ -1,5 +1,6 @@
 package time;
 
+import entity.TimeCode;
 import general.Code;
 import java.time.LocalDate;
 
