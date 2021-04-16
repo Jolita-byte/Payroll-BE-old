@@ -1,23 +1,25 @@
 import DAO.*;
 import entity.*;
-import payrollConnections.PayrollConnection;
+import service.ScheduleService;
+//import payrollConnections.PayrollConnection;
 import javax.persistence.EntityManager;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Main {
-    //private static final String URL = "jdbc:mysql://localhost:3306/payroll";
-    //private static final String USER = "root";
-    //private static final String PASSWORD = "Jolita4*";
+    private static final String URL = "jdbc:mysql://localhost:3306/payroll";
+    private static final String USER = "root";
+    private static final String PASSWORD = "Jolita4*";
 
 
     public static void main(String[] args) throws ClassNotFoundException {
 
         //Class.forName("org.h2.Driver"); //pasitikrinam
-        //try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
         //try (Connection conn = DriverManager.getConnection(PayrollConnection.getURL(), PayrollConnection.getUSER(), PayrollConnection.getPASSWORD())){
-        try (Connection conn = PayrollConnection.getConnection()) {
+        //try (Connection conn = PayrollConnection.getConnection()) {
 
             //ContractDAO contractDAO = new ContractDAOImpl(conn);
 
@@ -43,7 +45,8 @@ public class Main {
 
         //new GenerateData().generateAllData(em);
 
-        read();
+        //read();
+        fillschedules();
 
 
 
@@ -98,7 +101,20 @@ public class Main {
         System.out.println("------------");
     }
 
+    private static void fillschedules() {
+        HibernateProject hibernateProject = new HibernateProject();
+        EntityManager em = hibernateProject.getEntityManager();
+        ContractDAO contractDAO = new ContractDAO(em);
+        ContractLineDAO contractLineDAO = new ContractLineDAO(em);
+        SchedulePatternLineDAO schedulePatternLineDAO = new SchedulePatternLineDAO(em);
+        ShiftLineDAO shiftLineDAO = new ShiftLineDAO(em);
+        EmployeeScheduleEntryDAO employeeScheduleEntryDAO = new EmployeeScheduleEntryDAO(em);
 
+        ScheduleService scheduleService = new ScheduleService(contractDAO, contractLineDAO, schedulePatternLineDAO, shiftLineDAO, employeeScheduleEntryDAO);
+        scheduleService.fillContractSchedule(contractDAO.read(1), LocalDate.of(2021,01,01), LocalDate.of(2021, 01, 31));
+
+
+    }
 
 
     /*private static void updateContract(Connection conn) {

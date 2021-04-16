@@ -11,8 +11,14 @@ public class TimeCode {
 
     private String description;
 
-    @OneToMany(mappedBy="timeCode")
+    @OneToMany(mappedBy="time_code")
+    private List<EmployeeScheduleEntry> employeeScheduleEntries;
+
+    @OneToMany(mappedBy="time_code")
     private List<EmployeeTimesheetEntry> employeeTimeTableEntries;
+
+    @OneToMany(mappedBy="time_code")
+    private List<ShiftLine> shiftLines;
 
     public TimeCode() {
     }
@@ -36,6 +42,22 @@ public class TimeCode {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<EmployeeScheduleEntry> getEmployeeScheduleEntries() {
+        return employeeScheduleEntries;
+    }
+
+    public void setEmployeeScheduleEntries(List<EmployeeScheduleEntry> employeeScheduleEntries) {
+        this.employeeScheduleEntries = employeeScheduleEntries;
+    }
+
+    public List<EmployeeTimesheetEntry> getEmployeeTimeTableEntries() {
+        return employeeTimeTableEntries;
+    }
+
+    public void setEmployeeTimeTableEntries(List<EmployeeTimesheetEntry> employeeTimeTableEntries) {
+        this.employeeTimeTableEntries = employeeTimeTableEntries;
     }
 
     @Override

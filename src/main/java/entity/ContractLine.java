@@ -9,6 +9,45 @@ public class ContractLine {
         MONTHLY,
         HOURLY,
     }
+//https://thorben-janssen.com/hibernate-enum-mappings/
+    @Converter(autoApply=true)
+    public class AmountTypeConverter implements AttributeConverter<AmountType, String> {
+
+        @Override
+        public String convertToDatabaseColumn(AmountType attribute) {
+            if (attribute == null)
+                return null;
+
+            switch (attribute) {
+                case MONTHLY:
+                    return "Monthly";
+
+                case HOURLY:
+                    return "Hourly";
+
+                default:
+                    throw new IllegalArgumentException(attribute + " not supported.");
+            }
+        }
+
+        @Override
+        public AmountType convertToEntityAttribute(String dbData) {
+            if (dbData == null)
+                return null;
+
+            switch (dbData) {
+                case "Monthly":
+                    return AmountType.MONTHLY;
+
+                case "Hourly":
+                    return AmountType.HOURLY;
+
+                default:
+                    throw new IllegalArgumentException(dbData + " not supported.");
+            }
+        }
+
+    }
 
     @EmbeddedId
     private ContractLineID id;
@@ -23,7 +62,8 @@ public class ContractLine {
 
     private Integer staff;
 
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
+    @Convert(converter = AmountTypeConverter.class)
     private ContractLine.AmountType amount_type;
 
     private Float amount;
@@ -90,7 +130,7 @@ public class ContractLine {
 
     @Override
     public String toString() {
-        return "ContractLine{" +
+        return "\nContractLine{" +
                 "id=" + id +
                 ", schedule_code=" + schedule_code +
                 ", position_code=" + position_code +

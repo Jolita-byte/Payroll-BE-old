@@ -21,6 +21,9 @@ public class Contract {
     private LocalDate termination_date;
 
     @OneToMany(mappedBy="contract")
+    private List<EmployeeScheduleEntry> employeeScheduleEntries;
+
+    @OneToMany(mappedBy="contract")
     private List<EmployeeTimesheetEntry> employeeTimesheetEntries;
 
     public Contract() {
@@ -73,6 +76,14 @@ public class Contract {
         this.termination_date = termination_date;
     }
 
+    public List<EmployeeScheduleEntry> getEmployeeScheduleEntries() {
+        return employeeScheduleEntries;
+    }
+
+    public void setEmployeeScheduleEntries(List<EmployeeScheduleEntry> employeeScheduleEntries) {
+        this.employeeScheduleEntries = employeeScheduleEntries;
+    }
+
     public List<EmployeeTimesheetEntry> getEmployeeTimesheetEntries() {
         return employeeTimesheetEntries;
     }
@@ -89,7 +100,6 @@ public class Contract {
                 ", employment_date=" + employment_date +
                 ", contract_sign_date=" + contract_sign_date +
                 ", termination_date=" + termination_date +
-                ", employeeTimesheetEntries=" + employeeTimesheetEntries +
                 '}';
     }
 }

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class EmployeeTimesheetEntry {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -16,7 +17,7 @@ public class EmployeeTimesheetEntry {
 
     @ManyToOne
     @JoinColumn(name="time_code_id", nullable=false)
-    private TimeCode timeCode;
+    private TimeCode time_code;
 
     private Float hours;
 

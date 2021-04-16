@@ -10,17 +10,24 @@ public class ShiftLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String shift_code_id;
-    private String time_code_id;
+
+    @ManyToOne
+    @JoinColumn(name="shift_code_id", nullable=false)
+    private ShiftCode shift_code;
+
+    @ManyToOne
+    @JoinColumn(name="time_code_id", nullable=false)
+    private TimeCode time_code;
+
     private LocalTime begin;
     private LocalTime end;
 
     public ShiftLine() {
     }
 
-    public ShiftLine(String shift_code_id, String time_code_id, LocalTime begin, LocalTime end) {
-        this.shift_code_id = shift_code_id;
-        this.time_code_id = time_code_id;
+    public ShiftLine(ShiftCode shift_code, TimeCode time_code, LocalTime begin, LocalTime end) {
+        this.shift_code = shift_code;
+        this.time_code = time_code;
         this.begin = begin;
         this.end = end;
     }
@@ -33,20 +40,20 @@ public class ShiftLine {
         this.id = id;
     }
 
-    public String getShift_code_id() {
-        return shift_code_id;
+    public ShiftCode getShift_code() {
+        return shift_code;
     }
 
-    public void setShift_code_id(String shift_code_id) {
-        this.shift_code_id = shift_code_id;
+    public void setShift_code(ShiftCode shift_code) {
+        this.shift_code = shift_code;
     }
 
-    public String getTime_code_id() {
-        return time_code_id;
+    public TimeCode getTime_code() {
+        return time_code;
     }
 
-    public void setTime_code_id(String time_code_id) {
-        this.time_code_id = time_code_id;
+    public void setTime_code(TimeCode time_code) {
+        this.time_code = time_code;
     }
 
     public LocalTime getBegin() {
@@ -63,6 +70,17 @@ public class ShiftLine {
 
     public void setEnd(LocalTime end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return "ShiftLine{" +
+                "id=" + id +
+                ", shift_code=" + shift_code +
+                ", time_code=" + time_code +
+                ", begin=" + begin +
+                ", end=" + end +
+                '}';
     }
 }
 

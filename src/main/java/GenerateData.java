@@ -44,12 +44,12 @@ public class GenerateData {
 
     public void createShiftLines(EntityManager em){
         ShiftLineDAO shiftLineDAO = new ShiftLineDAO(em);
-        shiftLineDAO.create(new ShiftLine("A", "DD", LocalTime.of(8,0), LocalTime.of(12,0)));
-        shiftLineDAO.create(new ShiftLine("A", "DD", LocalTime.of(13,0), LocalTime.of(17,0)));
-        shiftLineDAO.create(new ShiftLine("D12", "DD", LocalTime.of(6,30), LocalTime.of(18,30)));
-        shiftLineDAO.create(new ShiftLine("N12", "DD", LocalTime.of(18,30), LocalTime.of(6,30)));
-        shiftLineDAO.create(new ShiftLine("N12", "DN", LocalTime.of(22,0), LocalTime.of(6,0)));
-        shiftLineDAO.create(new ShiftLine("P", "P", LocalTime.of(0,0), LocalTime.of(0,0)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("A"), new TimeCodeDAO(em).read("DD"), LocalTime.of(8,0), LocalTime.of(12,0)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("A"), new TimeCodeDAO(em).read("DD"), LocalTime.of(13,0), LocalTime.of(17,0)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("D12"), new TimeCodeDAO(em).read("DD"), LocalTime.of(6,30), LocalTime.of(18,30)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("N12"), new TimeCodeDAO(em).read("DD"), LocalTime.of(18,30), LocalTime.of(6,30)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("N12"), new TimeCodeDAO(em).read("DN"), LocalTime.of(22,0), LocalTime.of(6,0)));
+        shiftLineDAO.create(new ShiftLine(new ShiftCodeDAO(em).read("P"), new TimeCodeDAO(em).read("P"), LocalTime.of(0,0), LocalTime.of(0,0)));
     }
 
     public void createScheduleCodes(EntityManager em) {
@@ -60,22 +60,22 @@ public class GenerateData {
 
     public static void createSchedulePatternLines(EntityManager em) {
         SchedulePatternLineDAO schedulePatternLineDAO = new SchedulePatternLineDAO(em);
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,4),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,5),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,6),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,7),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,8),"A"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,9),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("A5", LocalDate.of(2021,1,10),"P"));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,4),new ShiftCodeDAO(em).read("A")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,5),new ShiftCodeDAO(em).read("A")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,6),new ShiftCodeDAO(em).read("A")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,7),new ShiftCodeDAO(em).read("A")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,8),new ShiftCodeDAO(em).read("A")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,9),new ShiftCodeDAO(em).read("P")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("A5"), LocalDate.of(2021,1,10),new ShiftCodeDAO(em).read("P")));
 
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,4),"D12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,5),"D12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,6),"N12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,7),"N12"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,8),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,9),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,10),"P"));
-        schedulePatternLineDAO.create(new SchedulePatternLine("PAM_D", LocalDate.of(2021,1,11),"P"));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,4),new ShiftCodeDAO(em).read("D12")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,5),new ShiftCodeDAO(em).read("D12")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,6),new ShiftCodeDAO(em).read("N12")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,7),new ShiftCodeDAO(em).read("N12")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,8),new ShiftCodeDAO(em).read("P")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,9),new ShiftCodeDAO(em).read("P")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,10),new ShiftCodeDAO(em).read("P")));
+        schedulePatternLineDAO.create(new SchedulePatternLine(new ScheduleCodeDAO(em).read("PAM_D"), LocalDate.of(2021,1,11),new ShiftCodeDAO(em).read("P")));
     }
 
     public void createPositionCodes(EntityManager em){

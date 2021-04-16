@@ -44,4 +44,14 @@ public class AmountCode {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    //    public enum Type{
+//        EARNING,
+//        DEDUCTION,
+//        INCOME_IN_KIND,
+//        BONUS_QUARTERLY,
+//        BONUS_ANNUAL;
+//    }
+//    private String code;
+//    private Type type;
 }

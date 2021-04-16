@@ -13,6 +13,9 @@ public class ScheduleCode {
     @OneToMany(mappedBy="schedule_code")
     private List<ContractLine> contractLines;
 
+    @OneToMany(mappedBy="schedule_code")
+    private List<SchedulePatternLine> schedulePatternLines;
+
     public ScheduleCode() {
     }
 

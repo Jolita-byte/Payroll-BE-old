@@ -10,17 +10,24 @@ public class SchedulePatternLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String schedule_code_id;
+
+    @ManyToOne
+    @JoinColumn(name="schedule_code_id", nullable=false)
+    private ScheduleCode schedule_code;
+
     private LocalDate initial_date;
-    private String shift_code_id;
+
+    @ManyToOne
+    @JoinColumn(name="shift_code_id", nullable=false)
+    private ShiftCode shift_code;
 
     public SchedulePatternLine() {
     }
 
-    public SchedulePatternLine(String schedule_code_id, LocalDate initial_date, String shift_code_id) {
-        this.schedule_code_id = schedule_code_id;
+    public SchedulePatternLine(ScheduleCode schedule_code, LocalDate initial_date, ShiftCode shift_code) {
+        this.schedule_code = schedule_code;
         this.initial_date = initial_date;
-        this.shift_code_id = shift_code_id;
+        this.shift_code = shift_code;
     }
 
     public Integer getId() {
@@ -31,12 +38,12 @@ public class SchedulePatternLine {
         this.id = id;
     }
 
-    public String getSchedule_code_id() {
-        return schedule_code_id;
+    public ScheduleCode getSchedule_code() {
+        return schedule_code;
     }
 
-    public void setSchedule_code_id(String schedule_code_id) {
-        this.schedule_code_id = schedule_code_id;
+    public void setSchedule_code(ScheduleCode schedule_code) {
+        this.schedule_code = schedule_code;
     }
 
     public LocalDate getInitial_date() {
@@ -47,21 +54,21 @@ public class SchedulePatternLine {
         this.initial_date = initial_date;
     }
 
-    public String getShift_code_id() {
-        return shift_code_id;
+    public ShiftCode getShift_code() {
+        return shift_code;
     }
 
-    public void setShift_code_id(String shift_code_id) {
-        this.shift_code_id = shift_code_id;
+    public void setShift_code(ShiftCode shift_code) {
+        this.shift_code = shift_code;
     }
 
     @Override
     public String toString() {
         return "SchedulePatternLine{" +
                 "id=" + id +
-                ", schedule_code_id='" + schedule_code_id + '\'' +
+                ", schedule_code=" + schedule_code +
                 ", initial_date=" + initial_date +
-                ", shift_code_id='" + shift_code_id + '\'' +
+                ", shift_code=" + shift_code +
                 '}';
     }
 }
