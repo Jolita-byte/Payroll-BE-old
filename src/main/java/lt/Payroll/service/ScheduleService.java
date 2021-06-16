@@ -88,16 +88,8 @@ public class ScheduleService {
             } else endDateTime = LocalDateTime.of(date.plusDays(1), s.getEnd());
 
             employeeScheduleEntry.setEndDateTime(endDateTime);
+
             employeeScheduleEntries.add(employeeScheduleEntry);
-
-
-/*            System.out.println(employeeScheduleEntry.getContract().getId());
-            System.out.println(employeeScheduleEntry.getShift().getId());
-            System.out.println(employeeScheduleEntry.getActivityCode().getId());
-            System.out.println(employeeScheduleEntry.getStartDateTime());
-            System.out.println(employeeScheduleEntry.getEndDateTime());*/
-
-
             employeeScheduleEntryRepository.save(employeeScheduleEntry);
         }
         return employeeScheduleEntries;

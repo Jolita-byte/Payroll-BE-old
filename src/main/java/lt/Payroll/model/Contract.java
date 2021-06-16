@@ -28,6 +28,9 @@ public class Contract {
     @OneToMany(mappedBy = "id.contract")
     private List<ContractLine> contractLines;
 
+    @OneToMany(mappedBy = "id.contract")
+    private List<EmployeeAmount> employeeAmounts;
+
 
     /*@OneToMany(mappedBy="contract")
     private List<EmployeeScheduleEntry> employeeScheduleEntries;

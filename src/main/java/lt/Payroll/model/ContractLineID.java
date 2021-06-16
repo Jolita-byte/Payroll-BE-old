@@ -17,6 +17,6 @@ public class ContractLineID implements Serializable {
     @JsonIgnore
     @JoinColumn(name="contract_id", nullable=false)
     private Contract contract;
-    //private Long contract_id;
+
     private LocalDate start_date;
 }

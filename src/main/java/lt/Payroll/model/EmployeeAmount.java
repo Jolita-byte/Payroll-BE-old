@@ -9,17 +9,12 @@ public class EmployeeAmount {
         AMOUNT,
         PERCENT,
     }
+
     @EmbeddedId
     private EmployeeAmountID id;
 
-/*    @ManyToOne
-    @JoinColumn(name="employee_id", nullable=false)
-    private Employee lt.Payroll.employee;
+    @Column(name = "amount_type")
+    private EmployeeAmount.AmountType amountType;
 
-    @ManyToOne
-    @JoinColumn(name="amount_code_id", nullable=false)
-    private AmountCode amountCode;*/
-
-    private EmployeeAmount.AmountType amount_type;
     private Float amount;
 }

@@ -1,4 +1,4 @@
-package lt.Payroll.employee;
+package edu.tests.employee;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

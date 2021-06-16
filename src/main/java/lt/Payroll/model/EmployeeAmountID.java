@@ -1,14 +1,18 @@
 package lt.Payroll.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Embeddable
 public class EmployeeAmountID implements Serializable {
+
     @ManyToOne
-    @JoinColumn(name="employee_id", nullable=false)
-    private Employee employee;
+    @JsonIgnore
+    @JoinColumn(name="contract_id", nullable=false)
+    private Contract contract;
 
     private LocalDate start_date;
 

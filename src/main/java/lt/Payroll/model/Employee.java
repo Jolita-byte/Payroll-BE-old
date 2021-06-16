@@ -1,12 +1,15 @@
 package lt.Payroll.model;
 
-import lombok.Data;
+
 
 import javax.persistence.*;
+import lombok.Data;
 import java.util.List;
+
 
 @Entity
 @Data
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +21,4 @@ public class Employee {
 
     @OneToMany(mappedBy="employee")
     private List<Contract> contracts;
-
-    //@OneToMany(mappedBy="id.lt.Payroll.employee") //likinai
-    //private List<EmployeeAmount> employeeAmounts; //laikiai
 }
