@@ -22,7 +22,6 @@ import static org.assertj.core.api.BDDAssumptions.given;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-//M@Sql("/data-test.sql")
 @RunWith(MockitoJUnitRunner.class)
 class EmployeeServiceTest {
 
