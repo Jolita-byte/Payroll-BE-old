@@ -13,6 +13,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+  profiles:
+    active: dev
 #    properties:
 #      hibernate:
 #        show_sql: true
